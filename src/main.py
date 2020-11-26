@@ -24,4 +24,4 @@ def index():
 @app.route("/searched")
 def searched():
     return render_template("searched.html")
-app.run(host='26.239.143.116', port=5555)
+app.run(host='0.0.0.0', port=5555)
