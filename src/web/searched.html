@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html style="filter: blur(0px);">
+<head lang="ru">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SoftF1nd</title>
+    <meta name="description" content="A site for LeaderOfDigital">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aldrich">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+    <link rel="stylesheet" href="assets/css/wtg-alert-1.css">
+    <link rel="stylesheet" href="assets/css/wtg-alert.css">
+    <link rel="shortcut icon" href="assets/img/logo_alpha.png" type="image/x-icon">
+    <script>
+        $( function() {
+        $.get(
+            "getAuto",
+            function(data) {
+                console.log(data)
+                var availableTags = data.split(",");
+                $( "#tags" ).autocomplete({
+                    source: availableTags
+                });
+            }
+        );
+    } );
+    </script>
+</head>
+<body style="filter: blur(0px);">
+    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+        <div class="container"><a class="navbar-brand" href="/" style="font-family: Aldrich, sans-serif;">SoftF1nd</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
+            <div class="collapse navbar-collapse" id="navcol-1"></div>
+        </div>
+    </nav>
+    <header class="masthead text-white text-center" style="background-color: rgb(128, 128,128);height: auto;">
+        <div class="overlay" style="height: 653px;margin: 0px;font-family: Aldrich, sans-serif;filter: blur(0px) brightness(200%);opacity: 0;height:auto;"></div>
+            <form method="POST" id="myForm">
+                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                        <div class="form-row">
+                            <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control" type="text" style="height: 48px;" id="tags" name="search"></div>
+                            <div class="col-12 col-md-3"><button class="btn btn-success btn-block btn-lg" type="submit" style="font-family: Aldrich, sans-serif;" id="ban">Поиск</button></div>
+                        </div>
+                </div>
+                <div style="margin-top: 10px; width: 190px; margin-left:120px;" id="filters">
+                    <select id="cat" name="cat" class="custom-select" style="margin-bottom: 10px;">
+                        <option value="cat-none">Категория</option>
+                        <option value="cat-office">Офис</option>
+                        <option value="cat-audio">Аудио</option>
+                        <option value="cat-webbrowser">Веббраузер</option>
+                        <option value="cat-game">Игры</option>
+                        <option value="cat-socialnetwork">Социальная сеть</option>
+                        <option value="cat-utils">Утилиты</option>
+                    </select>
+                    <select id="prc" name="prc" class="custom-select" style="margin-bottom: 10px;">
+                        <option value="prc-none">Цена</option>
+                        <option value="prc-free">Бесплатно</option>
+                        <option value="prc-middle">Бесплатно (с ограничениями)</option>
+                        <option value="prc-nofree">Платно</option>
+                    </select>
+                    <select id="src" name="src" class="custom-select" >
+                        <option value="src-none">Исходный код</option>
+                        <option value="src-open">Открыт</option>
+                        <option value="src-close">Закрыт</option>
+                    </select>
+                </div>
+            </div>            
+        </form>
+                {% for item in searchs %}
+                    <div class="wtg-alert wtg-alert-success mx-auto rounded shadow-lg" style="width: 800px;">
+                        <div class="wtg-alert-title">
+                                <i class="wtg-alert-icon glyphicon glyphicon-star "></i>
+                                <strong><a href="{{ item[11] }}" class="text-success">{{ item[0] }}</a></strong>
+                        </div>
+                                <p class="wtg-alert-text">
+                                    {{ item[10] }}
+                                </p>
+                        <div class="container">
+                        <div class="row">
+                            <!-- <p class="wtg-alert-text" style="font-size: 16px; margin-right: 10px;">Рэйтинг: {{item[4]}}</p> -->
+                            <p class="wtg-alert-text" style="font-size: 16px; margin-right: 10px;">Категория: {{item[1]}}</p>
+                            <p class="wtg-alert-text" style="font-size: 16px; margin-right: 10px;">Цена: {{item[3]}}</p>
+                            <p class="wtg-alert-text" style="font-size: 16px; margin-right: 10px;">Исходный код: {{item[5]}}</p>
+                            <a href="{{url_for("appPage",appID=item[0])}}">Промотреть</a>
+                        </div>
+                </div>        
+            </div>
+        {% endfor %}
+    </header>
+    <footer class="footer" style="height: auto;background-color:rgb(75, 75, 75);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
+                    <p class="text-muted small mb-4 mb-lg-0" style="font-family: Aldrich, sans-serif;">© SoftF1nd 2020. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"></a></li>
+                        <li class="list-inline-item"><a href="#"></a></li>
+                        <li class="list-inline-item"><a href="#"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="footer" style="height: auto;background-color:rgb(75, 75, 75);"></footer>
+        <footer class="footer" style="height: auto;background-color:rgb(75, 75, 75);"></footer>
+        <footer class="footer" style="height: auto;background-color:rgb(75, 75, 75);"></footer>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
